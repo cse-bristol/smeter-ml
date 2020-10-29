@@ -1,0 +1,5 @@
+numpy
+tensorflow<2.0
+scikit-learn
+flake8
+black
