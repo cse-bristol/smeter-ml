@@ -1,3 +1,18 @@
+"""Module for constructing the basic convolutional neural networks in Keras.
+
+This module exports four functions, all of which return a Keras model.
+They are all variations of a network with two convolutional layers and one dense layer.
+
+    base_cnn - Basic CNN with two output features: the upper and lower bounds of the HTC estimate.
+
+    base_cnn_single_output - Basic CNN with single output feature: the HTC.
+
+    base_cnn_with_static_features - Model with two sets of inputs: time series data + some static features,
+        e.g. the floor area of the house. Outputs the upper and lower bounds of the HTC estimate.
+
+    base_cnn_with_static_features_and_single_output - As above, but only outputs single HTC value.
+"""
+
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Conv1D, Flatten, Input, concatenate
 from tensorflow.keras.metrics import RootMeanSquaredError
@@ -6,9 +21,10 @@ from ml.model.loss import make_qd_loss_fn
 
 
 def base_cnn(input_shape, loss_fn=None):
-    """
-    Produce a basic CNN, with the architecture we determined to be pretty good in Phase 1.
-    Note: inputs should be channels *last*, i.e. the shape should be (<no. time series entries>, <no. channels>).
+    """Basic CNN with two output features - the upper and lower bounds of the HTC estimate.
+
+    Note: inputs should be channels *last*, i.e. the shape should be
+    (<no. time series entries>, <no. channels>).
     """
     if loss_fn is None:
         loss_fn = make_qd_loss_fn(lam=100., s=0.0104)
@@ -27,8 +43,9 @@ def base_cnn(input_shape, loss_fn=None):
 
 
 def base_cnn_single_output(input_shape):
-    """
-    Same as base_cnn above except that there is only one output feature (the HTC)
+    """Basic CNN with single output feature, the HTC.
+
+    Same as base_cnn above except that there is only one output feature, the HTC,
     as opposed to two (the upper and lower bounds).
     This is useful for doing experiments where you only care about the predicted value itself,
     not the prediction interval.
@@ -61,10 +78,19 @@ def _base_cnn(input_shape):
 
 
 def base_cnn_with_static_features(cnn_input_shape, static_features_input_shape, loss_fn=None):
-    """
-    Produce a keras model which is the combination of the CNN with some static features,
-    with a couple of MLP layers at the end.
-    (At the moment there is only one static feature, floor area).
+    """Model combining time series data and static features using a CNN and two dense layers.
+
+    Outputs two features, the upper and lower bounds of HTC estimate.
+
+    Time series     Static features
+         |                 |
+    Conv layers            |
+         |                 |
+         +-----------------+
+                  |
+             Dense layers
+                  |
+                Output
     """
     if loss_fn is None:
         loss_fn = make_qd_loss_fn(lam=100., s=0.0104)
@@ -86,10 +112,9 @@ def base_cnn_with_static_features(cnn_input_shape, static_features_input_shape, 
 
 
 def base_cnn_with_static_features_and_single_output(cnn_input_shape, static_features_input_shape):
-    """
-    Produce a keras model which is the combination of the CNN with some static features,
-    with a couple of MLP layers at the end, outputting just one feature (the HTC).
-    (At the moment there is only one static feature, floor area).
+    """Model combining time series data and static features using a CNN and two dense layers.
+
+    Outputs a single feature, the HTC estimate.
     """
     rmse = RootMeanSquaredError()
 

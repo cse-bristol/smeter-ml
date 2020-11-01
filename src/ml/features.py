@@ -1,3 +1,23 @@
+"""A collection of functions for creating arrays of input features for different model variations.
+
+Exports several functions:
+
+    make_X_and_y - Produces an array of input features, X, and an array of target features, y,
+        from the time series data in data/train/ or data/test.
+
+    make_sqm_X - Produces an array of building sq. m values, optionally scaling them
+
+    make_htc_proxy_X - Produces an array of naive HTC proxy values, which are
+        sum(gas) / mean(in_temp - out_temp) over the given time window.
+
+    make_feature_scale_factors - Saves a dictionary of features->scale_factors such that
+        each feature array can be mapped into [0,1]. File is saved in data/(train|test)/scalefactors.json.
+
+    get_feature_scale_factors - Simply loads the scalefactors from file and returns them as a dict.
+
+    unscale_outputs - Takes an array of output features (HTCs) and unscales them so they are the right size.
+"""
+
 import os
 import sys
 import csv

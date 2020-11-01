@@ -1,3 +1,8 @@
+"""A script for experimenting with different hyperparameters.
+
+At present you can only test out different values for the parameters of the loss function.
+"""
+
 import sys
 import numpy as np
 from ml.model.cnn import base_cnn

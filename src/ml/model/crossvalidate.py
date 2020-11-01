@@ -1,3 +1,12 @@
+"""Module for performing crossvalidation on a single model.
+
+Exports a single function, kfold_crossvalidate, which performs k-fold crossvalidation
+on a model created from the given config file and prints out the results.
+
+Can be run as a module (with python3 -m), in which case kfold_crossvalidate is called
+with the supplied config file.
+"""
+
 import os
 import sys
 import numpy as np

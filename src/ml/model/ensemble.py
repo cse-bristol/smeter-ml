@@ -1,3 +1,9 @@
+"""Module for generating an ensemble model from a given config file.
+
+Exports a single class, Ensemble, which provides methods for training the ensemble,
+saving the individual model files to disk and making predictions.
+"""
+
 import os
 import sys
 import numpy as np

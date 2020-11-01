@@ -1,3 +1,8 @@
+"""Paths.
+
+Exports a number of paths which are used by the other modules.
+"""
+
 from os.path import abspath, dirname, join
 
 current_dir = abspath(dirname(__file__))

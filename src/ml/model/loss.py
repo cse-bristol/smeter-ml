@@ -1,3 +1,9 @@
+"""Provides a constructor for the QD loss function.
+
+This loss function is used for producing prediction intervals as neural network outputs
+rather than just single predictions.
+"""
+
 import tensorflow as tf
 
 def make_qd_loss_fn(lam: float = 15.0, s: float = 160.0, alpha: float = 0.05):

@@ -1,3 +1,5 @@
+"""Helpful functions used by other model-related modules."""
+
 def read_config_file(config_path: str):
     """Reads a model config file and turns it into a dictionary.
     See the README in model-config for more info on what the available config options are.
