@@ -2,7 +2,7 @@
 
 This is a machine learning framework for creating models to predict the HTC of a domestic building using smart meter data + data from internal and external temperature sensors.
 
-It is assumed that the training and testing data has already been collected or generated. So long as the data follows the expected schema, it should be possible to use the framework to experiment with different models and train ensembles of them. The exact data schema is detailed in the section [Train/test data](#train-test-data). See also the sample data in `data/sample/`.
+It is assumed that the training and testing data has already been collected or generated. So long as the data follows the expected schema, it should be possible to use the framework to experiment with different models and train ensembles of them. The exact data schema is detailed in the section [Train/test data](#traintest-data). See also the sample data in `data/sample/`.
 
 The general interface is through `make` and one or more model configuration files which are stored in `model-config/`. Once a configuration file has been created for a model, you can train it on training data, test it on test data and perform crossvalidation on it. For more details, see the [Usage](#usage) section.
 
